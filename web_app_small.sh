@@ -12,7 +12,7 @@ npx create-react-app $APP_NAME
 cd $APP_NAME
 
 
-BASE_URL=https://raw.githubusercontent.com/bcbi/code_style_guide/master/
+BASE_URL=https://raw.githubusercontent.com/brown-ccv/code_style_guide/feat-ccvstyle/
 ASSET_URL=${BASE_URL}assets/
 COMPONENT_URL=${BASE_URL}core_components/
 
@@ -21,17 +21,16 @@ curl -g -L -f -o ./public/favicon.ico ${ASSET_URL}favicon.ico
 
 echo "Creating folders"
 cd src
-mkdir assets assets/s
+mkdir assets
 mkdir components
 mkdir __tests__
-
-
-echo "Replacing css"
-curl -g -L -f -o ./styles/* ${ASSET_URL}/styles/
 
 echo "Replacing App.js, index.js"
 curl -g -L -f -o ./App.js ${COMPONENT_URL}App.js
 curl -g -L -f -o ./index.js ${COMPONENT_URL}index.js
+
+echo "Replacing css"
+curl -g -L -f -o ./App.css ${ASSET_URL}App.css
 
 echo "Adding actions, reducer, sagas, client"
 curl -g -L -f -o ./actions.js ${COMPONENT_URL}actions.js
@@ -48,8 +47,9 @@ curl -g -L -f -o ./Spinner.js ${COMPONENT_URL}Spinner.js
 cd ..
 
 echo "Installing packages"
-npm install isomorphic-fetch lodash react-router-dom react-spinners bootstrap reactstrap redux redux-saga react-redux seamless-immutable \
-    git+https://github.com/brown-ccv/react-brownccv.git
+npm install isomorphic-fetch lodash react-router-dom react-spinners bootstrap reactstrap redux redux-saga react-redux seamless-immutable
+npm install git+https://github.com/brown-ccv/react-brownccv.git
+npm install git+https://bitbucket.brown.edu/scm/react/brown-university-styles.git#semver:^0.6
 
 echo "Running app - there will be warnings due to unused functions/variables"
 npm start
