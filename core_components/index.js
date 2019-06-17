@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
+import './styles/custom.scss';
 
 import reducer from './reducer';
 import rootSaga from './sagas';

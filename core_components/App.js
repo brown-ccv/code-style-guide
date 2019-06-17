@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
+import Navbar from 'react-brownccv/dist/components/Navbar';
+import BrownFooter from 'react-brownccv/dist/components/BrownFooter';
 
 // import components
-import HeaderNavigation from './components/HeaderNavigation';
 import AboutPage from './components/AboutPage';
 import ContentPage from './components/ContentPage';
 
@@ -14,13 +15,13 @@ class App extends Component {
       <BrowserRouter basename={`${process.env.PUBLIC_URL}`}>
         <div className="App">
           <div className="topContent">
-            <HeaderNavigation />
+            <Navbar />
             <div className="main-content">
               <Route path="/about" component={AboutPage} />
               <Route exact path="/" component={ContentPage} />
             </div>
           </div>
-          <footer className="text-muted"><small> © 2019 Brown Center for Biomedical Informatics, Brown University </small></footer>
+          <BrownFooter />
         </div>
       </BrowserRouter>
     );

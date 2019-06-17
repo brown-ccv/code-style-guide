@@ -21,15 +21,13 @@ curl -g -L -f -o ./public/favicon.ico ${ASSET_URL}favicon.ico
 
 echo "Creating folders"
 cd src
-mkdir assets
+mkdir assets assets/s
 mkdir components
 mkdir __tests__
 
-echo "Adding logo"
-curl -g -L -f -o ./assets/bcbi-logo.svg ${ASSET_URL}bcbi-white-h.svg
 
 echo "Replacing css"
-curl -g -L -f -o ./App.css ${ASSET_URL}App.css
+curl -g -L -f -o ./styles/* ${ASSET_URL}/styles/
 
 echo "Replacing App.js, index.js"
 curl -g -L -f -o ./App.js ${COMPONENT_URL}App.js
@@ -50,7 +48,8 @@ curl -g -L -f -o ./Spinner.js ${COMPONENT_URL}Spinner.js
 cd ..
 
 echo "Installing packages"
-npm install isomorphic-fetch lodash react-router-dom react-spinners bootstrap reactstrap redux redux-saga react-redux seamless-immutable
+npm install isomorphic-fetch lodash react-router-dom react-spinners bootstrap reactstrap redux redux-saga react-redux seamless-immutable \
+    git+https://github.com/brown-ccv/react-brownccv.git
 
 echo "Running app - there will be warnings due to unused functions/variables"
 npm start
