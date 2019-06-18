@@ -1,55 +1,25 @@
 #!/bin/bash
 
-# This script sets up a basic web app following BCBI style guides and using typical packages
+# This script sets up a basic web app following CCV style guides and using typical packages
 # It should be run from the parent directory you want you're app to live in
 # e.g. if you want your app to be in ~/src/my_app, you should run this from ~/src
 
 echo "What is your app name? (use naming convention <app>_frontend)"
 read APP_NAME
 
+echo "What is the organization and repo name for your project on GitHub (organization/repo_name)?"
+read REPO_NAME
+
 echo "Creating $APP_NAME"
-npx create-react-app $APP_NAME
+git clone https://github.com/brown-ccv/react-app-starter.git
+
+mv test $APP_NAME
 cd $APP_NAME
 
-
-BASE_URL=https://raw.githubusercontent.com/brown-ccv/code_style_guide/feat-ccvstyle/
-ASSET_URL=${BASE_URL}assets/
-COMPONENT_URL=${BASE_URL}core_components/
-
-echo "Replacing favicon"
-curl -g -L -f -o ./public/favicon.ico ${ASSET_URL}favicon.ico
-
-echo "Creating folders"
-cd src
-mkdir assets
-mkdir components
-mkdir __tests__
-
-echo "Replacing App.js, index.js"
-curl -g -L -f -o ./App.js ${COMPONENT_URL}App.js
-curl -g -L -f -o ./index.js ${COMPONENT_URL}index.js
-
-echo "Replacing css"
-curl -g -L -f -o ./App.css ${ASSET_URL}App.css
-
-echo "Adding actions, reducer, sagas, client"
-curl -g -L -f -o ./actions.js ${COMPONENT_URL}actions.js
-curl -g -L -f -o ./reducer.js ${COMPONENT_URL}reducer.js
-curl -g -L -f -o ./sagas.js ${COMPONENT_URL}sagas.js
-curl -g -L -f -o ./client.js ${COMPONENT_URL}client.js
-
-echo "Adding core components (about page, main page, navigation)"
-cd components
-curl -g -L -f -o ./AboutPage.js ${COMPONENT_URL}AboutPage.js
-curl -g -L -f -o ./ContentPage.js ${COMPONENT_URL}ContentPage.js
-curl -g -L -f -o ./HeaderNavigation.js ${COMPONENT_URL}HeaderNavigation.js
-curl -g -L -f -o ./Spinner.js ${COMPONENT_URL}Spinner.js
-cd ..
+git remote set-url origin https://github.com/${REPO_NAME}.git
 
 echo "Installing packages"
-npm install isomorphic-fetch lodash react-router-dom react-spinners bootstrap reactstrap redux redux-saga react-redux seamless-immutable
-npm install git+https://github.com/brown-ccv/react-brownccv.git
-npm install git+https://bitbucket.brown.edu/scm/react/brown-university-styles.git#semver:^0.6
+npm install
 
 echo "Running app - there will be warnings due to unused functions/variables"
 npm start

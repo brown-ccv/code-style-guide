@@ -5,9 +5,9 @@
 
 <a name="javascript_react"/></a>
 ## JavaScript - React
-Generally, BCBI apps should use React, Redux, Sagas, and Bootstrap. This allows for greater interoperability of components and easier maintenance.
+Generally, CCV apps should use React, Redux, Sagas, and Bootstrap, and Brown's Custom Style. This allows for greater interoperability of components and easier maintenance.
 
-An app typically consists of a frontend and backend.  The repos should be named `<app>_frontend` and `<app>_api`
+An app typically consists of a frontend and backend.  The repos should be named `<app>-frontend` and `<app>-api`
 
 ```
 npm install bootstrap react-redux redux redux-saga
@@ -17,7 +17,7 @@ npm install bootstrap react-redux redux redux-saga
 * Folder organization for a react-redux app is inspired on this [post](https://www.robinwieruch.de/tips-to-learn-react-redux/#folderOrganization). Depending on the leavel of complexity of your app, it may look something like
 
 ### For smaller projects:
-This web app can be automatically scaffolded with BCBI-specific theming and standard packages using `web_app_small.sh`
+This web app can be automatically scaffolded with CCV-specific theming and standard packages using `web_app_small.sh`. This will clone the brown-ccv/react-app-starter and change the remote to match your app's repository.
 
 ```
 src/
