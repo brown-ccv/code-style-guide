@@ -1,0 +1,14 @@
+{
+  "extends": "expo/tsconfig.base",
+  "files": [],
+  "compilerOptions": {
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "@mapps/lib": ["../lib"],
+      "@assets/*": ["assets/*"],
+      "@components/*": ["src/components/*"]
+    }
+  },
+  "references": [{ "path": "../lib" }],
+}
