@@ -1,0 +1,53 @@
+{
+  "compilerOptions": {
+    "emitDeclarationOnly": true,
+    "noEmit": false,
+    "allowSyntheticDefaultImports": true,
+    "allowUnreachableCode": false,
+    "allowUnusedLabels": false,
+    "baseUrl": "./",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "jsx": "react",
+    "lib": [
+      "esnext"
+    ],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitReturns": true,
+    "noImplicitUseStrict": false,
+    "noStrictGenericChecks": false,
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "paths": {
+      "@mapps/lib": [
+        "packages/lib"
+      ],
+      "@mapps/functions": [
+        "packages/functions"
+      ],
+      "@mapps/app": [
+        "packages/app"
+      ]
+    },
+    "resolveJsonModule": true,
+    "skipLibCheck": true,
+    "target": "esnext"
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "references": [
+    {
+      "path": [
+        "packages/lib",
+        "packages/functions",
+        "packages/app"
+      ]
+    }
+  ],
+  "extends": "expo/tsconfig.base"
+}
