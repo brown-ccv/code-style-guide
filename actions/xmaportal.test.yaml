@@ -1,0 +1,142 @@
+name: 🧪 Test
+on: pull_request
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  actions: write
+  contents: read
+
+env:
+  REACT_APP_NODE_ENV: "test"
+
+# TODO 87: Cache node and dependencies between jobs https://github.com/pph-collective/provident-app/blob/main/.github/workflows/cypress-testing.yml
+# - name: Cache NPM Dependencies
+# uses: actions/cache@v3
+# with:
+# path: '**/node_modules'
+# key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
+
+jobs:
+  lint:
+    name: ⬣ ESLint
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: npm
+          cache-dependency-path: ./package.json
+
+      - name: 📥 Install Dependencies
+        run: npm ci
+
+      - name: 🔬 Lint
+        run: npm run lint
+
+  typecheck:
+    name: ʦ TypeScript
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: npm
+          cache-dependency-path: ./package.json
+
+      - name: 📥 Install Dependencies
+        run: npm ci
+
+      - name: 🔎 Typecheck
+        run: npm run typecheck
+
+  unit_tests:
+    name: ⚡ Vitest Coverage
+    runs-on: ubuntu-latest
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: npm
+          cache-dependency-path: ./package.json
+
+      - name: 📥 Install Dependencies
+        run: npm ci
+
+      - name: ⚡ Run vitest
+        run: npm run test-coverage
+
+  integration_tests:
+    name: ⚫️ Cypress
+    runs-on: ubuntu-latest
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      SESSION_SECRET: ${{ secrets.SESSION_SECRET }}
+      FIREBASE_AUTH_EMULATOR_HOST: "127.0.0.1:9099"
+      FIREBASE_EMULATORS_PATH: ${{ github.workspace }}/emulator-cache
+      FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+      SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_XMA_PORTAL }}
+    steps:
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+
+      - name: ⎔ Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: npm
+          cache-dependency-path: ./package.json
+
+      - name: Cache firebase emulators
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.FIREBASE_EMULATORS_PATH }}
+          key: ${{ runner.os }}-firebase-emulators-${{hashFiles('emulator-cache/**') }}
+        continue-on-error: true
+
+      - name: 📥 Install Dependencies
+        run: npm ci
+
+      # TODO 430: Cache this step
+      - name: 🐳 Docker Compose
+        # TODO: What am I supposed to wait-on? http://localhost:3306 just hangs
+        run: docker compose up db -d && npx wait-on tcp:3306 # Sleep gives time for postgres to start
+
+      # TODO 50: Matrix action for  chrome, edge, firefox?
+      - name: 🌳 Cypress E2E (Chrome)
+        uses: cypress-io/github-action@v5
+        with:
+          install: false
+          # Splits the test-e2e-run script into its constituit parts
+          build: npm run build
+          start: npm run start
+          wait-on: "http://localhost:9099, http://localhost:3000/"
+          wait-on-timeout: 120
+          browser: chrome
+
+          # TODO 50: Run cypress tests in parallel
+          # parallel: true
+          # tag: chrome
+
+      - name: 🎥 Store videos
+        uses: actions/upload-artifact@v3
+        if: failure()
+        with:
+          name: cypress-videos
+          path: cypress/videos
+          if-no-files-found: ignore
+

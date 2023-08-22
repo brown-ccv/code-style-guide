@@ -1,0 +1,33 @@
+name: Test
+on: pull_request
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      - name: install dependencies
+        shell: bash
+        run: |
+          npm install -g npm
+          npm ci
+      - name: lint
+        shell: bash
+        run: |
+          npm run lint
+      - name: test
+        shell: bash
+        run: |
+          npm test -- --coverage
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: true
+      - name: docker build
+        shell: bash
+        run: |
+          docker build -t soma:latest .
