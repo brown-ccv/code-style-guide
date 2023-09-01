@@ -1,12 +1,12 @@
 {
   "name": "@brown-ccv/eslint-config",
+  "version": "0.1.0",
   "keywords": [
     "eslint",
     "eslintconfig"
   ],
   "main": "index.js",
   "packageManager": "yarn@3.6.3",
-  "private": true,
   "peerDependencies": {
     "@typescript-eslint/parser": "^5.60.1",
     "@typescript-eslint/eslint-plugin": "^5.60.1",
