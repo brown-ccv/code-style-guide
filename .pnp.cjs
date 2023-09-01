@@ -18,12 +18,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
       {\
         "name": "@brown-ccv/eslint-config",\
         "reference": "workspace:packages/eslint"\
+      },\
+      {\
+        "name": "@brown-ccv/prettier-config",\
+        "reference": "workspace:packages/prettier"\
       }\
     ],\
     "enableTopLevelFallback": true,\
     "ignorePatternData": "(^(?:\\\\.yarn\\\\/sdks(?:\\\\/(?!\\\\.{1,2}(?:\\\\/|$))(?:(?:(?!(?:^|\\\\/)\\\\.{1,2}(?:\\\\/|$)).)*?)|$))$)",\
     "fallbackExclusionList": [\
       ["@brown-ccv/eslint-config", ["workspace:packages/eslint"]],\
+      ["@brown-ccv/prettier-config", ["workspace:packages/prettier"]],\
       ["style-guide", ["workspace:."]]\
     ],\
     "fallbackPool": [\
@@ -42,6 +47,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./packages/eslint/",\
           "packageDependencies": [\
             ["@brown-ccv/eslint-config", "workspace:packages/eslint"]\
+          ],\
+          "linkType": "SOFT"\
+        }]\
+      ]],\
+      ["@brown-ccv/prettier-config", [\
+        ["workspace:packages/prettier", {\
+          "packageLocation": "./packages/prettier/",\
+          "packageDependencies": [\
+            ["@brown-ccv/prettier-config", "workspace:packages/prettier"]\
           ],\
           "linkType": "SOFT"\
         }]\
