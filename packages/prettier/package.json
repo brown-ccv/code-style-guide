@@ -1,0 +1,12 @@
+{
+  "name": "@brown-ccv/prettier-config",
+  "version": "0.1.0",
+  "keywords": [
+    "prettier",
+    "prettierconfig"
+  ],
+  "packageManager": "yarn@3.6.3",
+  "peerDependencies": {
+    "prettier": ">=3.0.0"
+  }
+}
