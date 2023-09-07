@@ -11,7 +11,6 @@ module.exports = {
     "plugin:import/errors",
     "plugin:import/warnings",
     "plugin:import/typescript",
-    "plugin:jsdoc/recommended-typescript",
     "prettier"
   ],
   parser: "@typescript-eslint/parser",
@@ -23,11 +22,9 @@ module.exports = {
   ],
   plugins: [
     "@typescript-eslint",
-    "jsdoc",
     "import",
   ],
   rules: {
-    "quotes": ["error", "double"],
     "import/no-unresolved": 0,
     "indent": ["error", 2],
     "import/order": [
