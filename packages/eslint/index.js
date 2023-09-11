@@ -3,7 +3,7 @@ module.exports = {
   env: {
     es6: true,
     node: true,
-    jest: true
+    jest: true,
   },
   extends: [
     "eslint:recommended",
@@ -11,7 +11,7 @@ module.exports = {
     "plugin:import/errors",
     "plugin:import/warnings",
     "plugin:import/typescript",
-    "prettier"
+    "prettier",
   ],
   parser: "@typescript-eslint/parser",
   ignorePatterns: [
@@ -20,17 +20,20 @@ module.exports = {
     "build",
     "node_modules",
   ],
-  plugins: [
-    "@typescript-eslint",
-    "import",
-  ],
+  plugins: ["@typescript-eslint", "import"],
   rules: {
     "import/no-unresolved": 0,
-    "indent": ["error", 2],
     "import/order": [
       "warn",
       {
-        groups: ["builtin", "external", "internal", "parent", "sibling", "index"],
+        groups: [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+        ],
       },
     ],
   },
