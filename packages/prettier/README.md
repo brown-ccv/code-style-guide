@@ -12,12 +12,27 @@ This package has `prettier` as a peer dependency.
 
 To use the config add the following to your `package.json` file:
 
-```
+```json
 {
   ...
   "prettier": "@brown-ccv/prettier-config",
   ...
 }
+```
+
+To use the config as a base for custom settings add the following to your `.prettierrc.js`:
+
+```js
+const brownPrettierConfig = require("@brown-ccv/prettier-config");
+
+/** @type {import("prettier").Config} */
+module.exports = {
+  // Base config
+  ...brownPrettierConfig,
+  // Custom settings
+  singleQuote: false,
+  jsxSingleQuote: false,
+};
 ```
 
 Make sure and create a `.prettierignore` to ignore any files you don't want to format. Below is an example:
