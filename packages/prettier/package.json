@@ -8,5 +8,8 @@
   "packageManager": "yarn@3.6.3",
   "peerDependencies": {
     "prettier": ">=3.0.0"
+  },
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.2.0"
   }
 }
