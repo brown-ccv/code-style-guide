@@ -1,0 +1,34 @@
+pre-commit:
+  commands:
+    test:
+      glob: "*.{js,jsx}"
+      run: |
+        if [ -f yarn.lock ]; then
+          if yarn run 2>/dev/null | tail -n +3 | grep -q test; then
+            yarn test
+          fi
+        else
+          npm run --if-present test
+        fi
+    lint:
+      glob: "*.{js,jsx,ts,tsx}"
+      run: |
+        if [ -f yarn.lock ]; then
+          if yarn run 2>/dev/null | tail -n +3 | grep -q lint; then
+            yarn lint {staged_files}
+          fi
+        else
+          npm run --if-present lint -- {staged_files}
+        fi
+        git add {staged_files}
+    format:
+      glob: "*.{js,jsx,ts,tsx}"
+      run: |
+        if [ -f yarn.lock ]; then
+          if yarn run 2>/dev/null | tail -n +3 | grep -q format; then 
+            yarn format {staged_files}
+          fi
+        else
+          npm run --if-present format -- {staged_files}
+        fi
+        git add {staged_files}
