@@ -1,6 +1,6 @@
 {
   "name": "@brown-ccv/eslint-config",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "keywords": [
     "eslint",
     "eslintconfig"
@@ -13,5 +13,10 @@
     "eslint": "^8.43.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-import": "^2.27.5"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "8.3",
+    "@typescript-eslint/parser": "8.3",
+    "eslint": "^9.9.1"
   }
 }
