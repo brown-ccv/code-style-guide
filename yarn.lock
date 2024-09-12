@@ -8,14 +8,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@brown-ccv/eslint-config@workspace:packages/eslint"
   peerDependencies:
-    "@typescript-eslint/eslint-plugin": ^5.60.1
-    "@typescript-eslint/parser": ^5.60.1
-    eslint: ^8.43.0
+    "@typescript-eslint/eslint-plugin": ^8.5.0
+    "@typescript-eslint/parser": ^8.5.0
+    eslint: ^9.10.0
     eslint-config-prettier: ^8.8.0
     eslint-plugin-import: ^2.27.5
-    eslint-plugin-jsdoc: ^46.4.3
-    lerna: ^6.6.2
-    prettier: ^2.8.8
   languageName: unknown
   linkType: soft
 
@@ -23,7 +20,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@brown-ccv/prettier-config@workspace:packages/prettier"
   peerDependencies:
-    prettier: "*"
+    prettier: ">=3.0.0"
   languageName: unknown
   linkType: soft
 
