@@ -1,0 +1,9 @@
+{
+  "name": "@brown-ccv/lefthook-config",
+  "version": "0.1.0",
+  "main": "lefthook.js.yaml",
+  "exports": {
+    ".": "./lefthook.js.yaml"
+  },
+  "packageManager": "yarn@3.6.3"
+}
